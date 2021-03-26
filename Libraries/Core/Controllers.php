@@ -15,8 +15,6 @@ class Controllers{
 		if(file_exists($routeClass)){			
 			require_once($routeClass);
 			$this->model = new $model();
-		}else{
-			echo "Modelo no existe";
 		}
 	}
 }

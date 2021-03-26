@@ -14,6 +14,15 @@ function dep($data){
 	return $format;
 }
 
+function headerAdmin($data=""){
+    $view_header = "Views/Template/header_admin.php";
+    require_once ($view_header);
+}
+function footerAdmin($data=""){
+    $view_footer = "Views/Template/footer_admin.php";
+    require_once ($view_footer);
+}
+
 //Elimina exceso de espacios entre palabras
 function strClean($strCadena){
     $string = preg_replace(['/\s+/','/^\s|\s$/'],[' ',''], $strCadena);
@@ -79,6 +88,12 @@ function token()
 function formatMoney($cantidad){
     $cantidad = number_format($cantidad,2,SPD,SPM);
     return $cantidad;
+}
+
+// modal
+function getModal(string $modal,$data){
+    $ViewModal = 'Views/Template/Modals/'.$modal.'.php';
+    require_once ($ViewModal);
 }
 
 ?>
