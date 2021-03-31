@@ -4,7 +4,7 @@
     <main class="app-content">
       <div class="app-title">
         <div>
-          <h1><i class="fas fa-user-tag"></i> <?=$data['page_tag'];?> <button class="btn btn-primary" onclick="openModal();"><i class="fas fa-plus"></i> Nuevo</button></h1>
+          <h1><i class="fas fa-user-tag"></i> <?=$data['page_tag'];?> <button class="btn btn-info" onclick="openModal();"><i class="fas fa-plus"></i> Nuevo</button></h1>
           <!-- <p>Start a beautiful journey here</p> -->
         </div>
         <ul class="app-breadcrumb breadcrumb">

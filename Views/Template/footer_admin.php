@@ -9,7 +9,8 @@
     <script src="Assets/js/font-awesome.js"></script>    
     <script type="text/javascript" src="Assets/js/plugins/jquery.dataTables.min.js"></script>
     <script type="text/javascript" src="Assets/js/plugins/dataTables.bootstrap.min.js"></script>
-    <script type="text/javascript">const base_url = '<?=base_url();?>'</script>   
+    <script type="text/javascript">const base_url = '<?=base_url();?>'</script> 
+    <script type="text/javascript" src="Assets/js/plugins/sweetalert.min.js"></script>  
     <script src="Assets/js/functions_rol.js"></script>
   </body>
 </html>

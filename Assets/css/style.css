@@ -3,3 +3,13 @@
 	background-color: grey;
 	padding: 5px;
 }
+
+.headerRegister{
+	background-color: #17a2b8;
+	color: #fafbfd;
+}
+.headerUpdate{
+	background-color: #0565DF;
+	color: #fafbfd;
+	
+}
