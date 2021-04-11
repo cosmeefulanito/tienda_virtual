@@ -16,6 +16,13 @@ class rolesModel extends Mysql{
 		return $Result;
 	}
 
+	public function selectRol(int $idrol){
+		$this->intId = $idrol;
+		$Select = "SELECT * FROM rol WHERE id = {$this->intId}";
+		$Response = $this->select($Select);
+		return $Response;
+	}
+
 	public function insertRol(string $nombre, string $descripcion, int $estado){
 		$response = "";
 		$this->strNombre = $nombre;
@@ -34,10 +41,46 @@ class rolesModel extends Mysql{
 		}
 
 		return $response;
+	}
 
+	public function updateRol(int $idrol, string $nombre, string $descripcion,int $estado){		
+		$this->intId = $idrol;
+		$this->strNombre = $nombre;
+		$this->strDescripcion = $descripcion;
+		$this->intEstado = $estado;
+		$sql = "SELECT * FROM rol WHERE nombre = '$this->strNombre' AND id != $this->intId"; 
+		$resultSql = $this->select_All($sql);
+		if(empty($resultSql)){
+			$Arr = array($this->strNombre, $this->strDescripcion, $this->intEstado, $this->intId);
+			$Query = "UPDATE rol set nombre = ? , descripcion = ?, status = ?  WHERE id = ? ";
+			$Response = $this->update($Query, $Arr);	
+		}else{
+			$Response="Exist";
+		}
+		
+		return $Response;
+	}
+
+	public function deleteRol(int $idrol){
+		$this->intId = $idrol;
+		$Validate = "SELECT * FROM persona WHERE rolid = $this->intId";
+		$Result = $this->select_All($Validate); 
+		if(empty($Result)){
+			$Arr = array(0);
+			$Query = "UPDATE rol SET status = ? WHERE id = $this->intId";
+			
+			if($this->update($Query,$Arr)){
+				$Response="OK";
+			}else{
+				$Response="Error";
+			}
+		}else{
+			$Response="exist";
+		}
+		return $Response;
 	}
 
 	
-}
+} //fin clase rol
 
 ?>

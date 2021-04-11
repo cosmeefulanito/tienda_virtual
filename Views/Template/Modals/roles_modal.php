@@ -1,8 +1,3 @@
-<!-- Button trigger modal -->
-<!-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-  Launch demo modal
-</button> -->
-
 <!-- Modal -->
 <div class="modal fade" id="modalFormRol" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
@@ -14,21 +9,21 @@
         </button>
       </div>
       <form id="rolForm" name="rolForm">
-        <input type="hidden" id="idrol" value="">
+        <input type="hidden" id="idrol" name="idrol" value="">
         <div class="modal-body">        
             <div class="form-group">
               <label for="nombre_rol">Nombre</label>
-              <input class="form-control" id="nombre_rol" name="nombre_rol" type="text" aria-describedby="emailHelp" placeholder="Enter email" required="">
+              <input class="form-control" id="nombre_rol" name="nombre_rol" type="text" aria-describedby="emailHelp" required="" autocomplete="off">
             </div>
             <div class="form-group">
               <label for="descripcion_rol">Descripcion</label>
-              <input class="form-control" id="descripcion_rol" name="descripcion_rol" type="text" aria-describedby="emailHelp" placeholder="" required="">
+              <input class="form-control" id="descripcion_rol" name="descripcion_rol" type="text" aria-describedby="emailHelp" required="" autocomplete="off">
             </div>
             <div class="form-group">
               <label for="estado">Estado</label>
               <select class="form-control" id="estado" name="estado">
                 <option value="1">Activo</option>
-                <option value="0">Inactivo</option>              
+                <option value="2">Inactivo</option>              
               </select>
             </div>        
         </div>

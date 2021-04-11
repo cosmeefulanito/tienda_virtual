@@ -38,7 +38,7 @@ class Mysql extends Conexion{
 
 	// Devuelve todos los registros
 	public function select_All(string $query){
-		$this->strquery = $query;
+		$this->strquery = $query;		
 		$result = $this->conexion->prepare($this->strquery);
 		$result->execute();
 		$response = $result->fetchAll(PDO::FETCH_ASSOC);

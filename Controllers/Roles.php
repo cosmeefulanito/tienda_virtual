@@ -19,14 +19,15 @@ class Roles extends Controllers{
 
 		for ($i=0; $i < count($Roles) ; $i++) {
 			if($Roles[$i]['status']==1){
-				$Roles[$i]['status']='<button class="btn btn-success" type="button">Activo</button>';				
-			}else{
-				$Roles[$i]['status']='<button class="btn btn-danger" type="button">Inactivo</button>';
+				// $Roles[$i]['status']='<button class="btn btn-success" type="button">Activo</button>';			
+				$Roles[$i]['status']='<span class="badge badge-pill badge-success">Activo</span>';			
+			}else{				
+				$Roles[$i]['status']='<span class="badge badge-pill badge-danger">Inactivo</span>';
 			}
 			$Roles[$i]['accion']='<div class="text-center">';
-			$Roles[$i]['accion'].='<button class="btn btn-info btnPermisosRol" title="Permisos" type="button"><i class="fas fa-key"></i></button>';
-			$Roles[$i]['accion'].='<button class="btn btn-secondary btnEditarRol" title="Editar" type="button"><i class="fas fa-edit"></i></button>';
-			$Roles[$i]['accion'].='<button class="btn btn-warning btnEliminarRol" title="Eliminar" type="button"><i class="fas fa-trash-alt"></i></button>';
+			$Roles[$i]['accion'].='<button class="btn btn-info btnPermisosRol" title="Permisos" rl="'.$Roles[$i]['id'].'"  type="button"><i class="fas fa-key"></i></button>';
+			$Roles[$i]['accion'].='<button class="btn btn-secondary btnEditarRol" title="Editar" rl="'.$Roles[$i]['id'].'" type="button"><i class="fas fa-edit"></i></button>';
+			$Roles[$i]['accion'].='<button class="btn btn-warning btnEliminarRol" title="Eliminar" rl="'.$Roles[$i]['id'].'" type="button"><i class="fas fa-trash-alt"></i></button>';
 			$Roles[$i]['accion'].='<div>';			
 		}
 
@@ -34,12 +35,21 @@ class Roles extends Controllers{
 	}
 
 	public function setRol(){
+		$intIdRol = intval($_POST['idrol']);
 		$strRol = strClean($_POST['nombre_rol']);
 		$strDescripcion = strClean($_POST['descripcion_rol']);
 		$strEstado = intval($_POST['estado']);
-		$Request = $this->model->insertRol($strRol,$strDescripcion,$strEstado);
+		if($intIdRol == 0){
+			$Request = $this->model->insertRol($strRol,$strDescripcion,$strEstado);
+			$tipo = 1;
+		}else{
+			$Request = $this->model->updateRol($intIdRol,$strRol,$strDescripcion,$strEstado);	
+			$tipo = 2;
+		}
+		
 		if($Request>0){
-			$arrResponse = array('status' => true ,'msg' => 'Datos guardados correctamente' );
+			if($tipo==1){$arrResponse = array('status' => true ,'msg' => 'Datos guardados correctamente' );}
+			if($tipo==2){$arrResponse = array('status' => true ,'msg' => 'Datos ACtualizados correctamente' );}			
 		}else if($Request=='existe'){
 			$arrResponse = array('status' => false ,'msg' => 'Ya existe un rol con ese nombre' );
 		}else{
@@ -47,6 +57,38 @@ class Roles extends Controllers{
 		}		
 		
 		echo json_encode($arrResponse);
+	}
+
+	public function getRol(int $idrol){
+		$idrol = intval(strClean($idrol));		
+
+		if($idrol>0){
+			$Response = $this->model->selectRol($idrol);
+			if($Response){
+				$arrResponse = array('status' => true , 'msg' => 'Datos cargados correctamente','data'=> $Response );				
+			}else{
+				$arrResponse = array('status' => false , 'msg' => 'Error al cargar los datos' );	
+			}
+			
+		}
+		// dep($arrResponse);
+		echo json_encode($arrResponse);
+	}
+
+	public function delRol(){		
+		if($_POST){
+			$idrol = intval(strClean($_POST['idrol']));
+			$request = $this->model->deleteRol($idrol);
+			if($request == 'OK'){
+				$arrResponse = array('status' => true , 'msg' => 'Datos eliminados correctamente');				
+			}else if($request=='exist'){
+				$arrResponse = array('status' => false , 'msg' => 'No es posible eliminar un rol asociado a un usuario');
+			}else{
+				$arrResponse = array('status' => false , 'msg' => 'Error al eliminar el rol');
+			}
+		}
+		echo json_encode($arrResponse);	
+		
 	}
 
 	

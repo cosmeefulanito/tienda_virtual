@@ -1,6 +1,6 @@
     <?= headerAdmin($data); ?>    
     <?= getModal("roles_modal",$data); ?>
-
+    <div id="ajaxResponse"></div>
     <main class="app-content">
       <div class="app-title">
         <div>
