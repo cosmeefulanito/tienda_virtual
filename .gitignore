@@ -1,9 +1,4 @@
 .sql
 .rar
-.htaccess
 error_log
-Config/Config.php
 Template/
-Usuarios.php
-Helpers.php
-
