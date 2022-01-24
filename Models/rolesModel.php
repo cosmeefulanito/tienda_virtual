@@ -1,5 +1,7 @@
 <?php
 
+
+
 class rolesModel extends Mysql{
 	public $intId;
 	public $strNombre;
@@ -11,14 +13,19 @@ class rolesModel extends Mysql{
 	}
 
 	public function getRoles(){
-		$Query="SELECT * FROM rol WHERE status !=0 order by id DESC";
+		$Where='';
+		if ($_SESSION['iduser']!=1) {
+			$Where.=' AND id != 1 ';
+		}
+		$Query="SELECT * FROM rol WHERE status !=0 ".$Where."order by id DESC";
+		// echo $Query;
 		$Result = $this->select_All($Query);
 		return $Result;
 	}
 
 	public function selectRol(int $idrol){
 		$this->intId = $idrol;
-		$Select = "SELECT * FROM rol WHERE id = {$this->intId}";
+		$Select = "SELECT * FROM rol WHERE id = {$this->intId} ";
 		$Response = $this->select($Select);
 		return $Response;
 	}
@@ -29,7 +36,7 @@ class rolesModel extends Mysql{
 		$this->strDescripcion = $descripcion;
 		$this->intEstado = $estado;
 
-		$Validate = "SELECT * FROM rol WHERE nombre = '{$this->strNombre}'";
+		$Validate = "SELECT * FROM rol WHERE nombre = '{$this->strNombre}' AND status !=0";
 		$Response_validate = $this->select_All($Validate);
 		
 		if(empty($Response_validate)){

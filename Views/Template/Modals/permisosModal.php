@@ -9,9 +9,9 @@
       </div>
       <div class="modal-body">        
         <div class="col-md-12">
-          <div class="tile">
-            <!-- <h3 class="tile-title">Responsive Table</h3> -->
+          <div class="tile">            
             <form id="formPermisos" name="formPermisos" action="">
+              <input type="hidden" name="idrol" id="idrol" value="<?= $data['idrol']; ?>">
               <div class="table-responsive">
                 <table class="table">
                   <thead>
@@ -25,52 +25,65 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <?= 
+                    <?php
+                    // dep($data);
                     $no=1;
                     $modulos = $data['modulos'];
                     for ($i=0; $i < count($modulos); $i++) { 
                       $permisos = $modulos[$i]['permisos'];
-                      $Rcheck = $permisos['r'] == 1 ? 'checked' : '' ;
-                      $Wcheck = $permisos['w'] == 1 ? 'checked' : '' ;
-                      $Ucheck = $permisos['u'] == 1 ? 'checked' : '' ;
-                      $Dcheck = $permisos['d'] == 1 ? 'checked' : '' ;
+                      $Rcheck = $permisos['r'] == 1 ? " checked " : "" ;
+                      $Wcheck = $permisos['w'] == 1 ? " checked " : "" ;
+                      $Ucheck = $permisos['u'] == 1 ? " checked " : "" ;
+                      $Dcheck = $permisos['d'] == 1 ? " checked " : "" ;
                       $idmodulo = $modulos[$i]['id'];
                     ?>
                     <tr>
                       <td>
                         <?= $no; ?>
-                        <input type="hidden" name="modulos[<?= $i ?>][id]" value="<? $idmodulo; ?>">
+                        <input type="hidden" name="modulos[<?= $i; ?>][id]" value="<?= $idmodulo; ?>">
                       </td>
                       <td>
                         <?= $modulos[$i]['titulo']; ?>
                       </td>
                       <td>
                       <div class="toggle-flip">
-                        <label><input type="checkbox" name="modulos[<?=$i;?>][r]" <?= $Rcheck; ?> ><span class="flip-indecator" data-toggle-on="ON" data-toggle-off="OFF"></span></label>
+                        <label>
+                          <input type="checkbox" name="modulos[<?=$i;?>][r]" <?= $Rcheck; ?> >
+                          <span class="flip-indecator" data-toggle-on="ON" data-toggle-off="OFF"></span>
+                        </label>
                       </div>
                       </td>
                       <td>
                         <div class="toggle-flip">
-                          <label><input type="checkbox" name="modulos[<?=$i;?>][r]" <?= $Wcheck; ?>><span class="flip-indecator" data-toggle-on="ON" data-toggle-off="OFF"></span></label>
+                          <label>
+                            <input type="checkbox" name="modulos[<?=$i;?>][w]" <?= $Wcheck; ?>>
+                            <span class="flip-indecator" data-toggle-on="ON" data-toggle-off="OFF"></span>
+                          </label>
                         </div>
                       </td>
                       <td>
                         <div class="toggle-flip">
-                          <label><input type="checkbox" name="modulos[<?=$i;?>][r]" <?= $Ucheck; ?>><span class="flip-indecator" data-toggle-on="ON" data-toggle-off="OFF"></span></label>
+                          <label>
+                            <input type="checkbox" name="modulos[<?=$i;?>][u]" <?= $Ucheck; ?>>
+                            <span class="flip-indecator" data-toggle-on="ON" data-toggle-off="OFF"></span>
+                          </label>
                         </div>
                       </td>
                       <td>
                         <div class="toggle-flip">
-                          <label><input type="checkbox" name="modulos[<?=$i;?>][r]" <?= $Dcheck; ?>><span class="flip-indecator" data-toggle-on="ON" data-toggle-off="OFF"></span></label>
+                          <label>
+                            <input type="checkbox" name="modulos[<?=$i;?>][d]" <?= $Dcheck; ?>>
+                            <span class="flip-indecator" data-toggle-on="ON" data-toggle-off="OFF"></span>
+                          </label>
                         </div>
                       </td>
                     </tr>
-                    <?= $no++;} ?>
+                    <?php $no++;} ?>
                   </tbody>
                 </table>
               </div>
               <div class="text-center">
-                <button class="btn btn-success" type="button"><i class="fas fa-save"></i> Guardar</button>
+                <button class="btn btn-success" type="submit"><i class="fas fa-save"></i> Guardar</button>
                 <button class="btn btn-secondary" type="button" data-dismiss="modal"><i class="fas fa-sign-out-alt"></i> Salir</button>
               </div>
             </form>

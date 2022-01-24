@@ -28,8 +28,8 @@
             </div>        
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-          <button type="submit" class="btn btn-info" id="btnActionForm"><span id="btnText">Guardar</span></button>
+          <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fas fa-times-circle"></i> Cancelar</button>
+          <button type="submit" class="btn btn-info" id="btnActionForm"><i class="fas fa-check-circle"></i> <span id="btnText">Guardar</span></button>
         </div>
       </form>
     </div>

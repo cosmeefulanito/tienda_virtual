@@ -12,4 +12,11 @@ CONST DB_USER = "root";
 CONST DB_PASSWORD = "";
 CONST DB_CHARSET = "charset=utf8";
 
+// Crear variables constantes
+//Datos envio de correo
+const NOMBRE_REMITENTE = "ANDRÉS ASTORGA SPA.";
+const EMAIL_REMITENTE = "no-reply@aastorgaspa.cl";
+const NOMBRE_EMPESA = "Asesorías y servicios tic aastorga spa";
+const WEB_EMPRESA = "www.aaastorgatic.cl";
+
 ?>

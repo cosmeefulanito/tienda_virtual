@@ -5,6 +5,11 @@ function base_url(){
 	return BASE_URL;
 }
 
+ function media()
+{
+    return BASE_URL."/Assets";
+}
+
 // Muestra array ordenado
 function dep($data){
 	$format = print_r("<pre>");
@@ -57,6 +62,13 @@ function strClean($strCadena){
     return $string;
 }
 
+function setSessionUser($idpersona){ //Actualiza variable de sesion del usuario
+    require_once("Models/loginModel.php");
+    $objLogin = new LoginModel();
+    $Request = $objLogin->setLoginUser($idpersona);
+    return $Request;
+}
+
 //Genera una contraseña de 10 caracteres
 function passGenerator($length = 10)
 {
@@ -95,5 +107,41 @@ function getModal(string $modal,$data){
     $ViewModal = 'Views/Template/Modals/'.$modal.'.php';
     require_once ($ViewModal);
 }
+
+//Envio de correos
+function sendEmail($data,$template)
+{
+    $asunto = $data['asunto'];
+    $emailDestino = $data['email'];
+    $empresa = NOMBRE_REMITENTE;
+    $remitente = EMAIL_REMITENTE;
+    //ENVIO DE CORREO
+    $de = "MIME-Version: 1.0\r\n";
+    $de .= "Content-type: text/html; charset=UTF-8\r\n";
+    $de .= "From: {$empresa} <{$remitente}>\r\n";
+    ob_start();
+    require_once("Views/Template/Email/".$template.".php");
+    $mensaje = ob_get_clean();
+    $send = mail($emailDestino, $asunto, $mensaje, $de);
+    return $send;
+}
+
+function getPermisosModulo(int $idmodulo){
+    include_once 'Models/permisosModel.php';
+    $objPermisos = new PermisosModel();
+    $Idrol = $_SESSION['userSession']['rolid'];
+    $arrPermisos = $objPermisos->permisosModulo($Idrol);
+    $permisos='';
+    $permisosMod='';
+    if(count($arrPermisos)>0){
+        $permisos=$arrPermisos;
+        $permisosMod= isset($arrPermisos[$idmodulo]) ? $arrPermisos[$idmodulo] : "" ;
+    }
+
+    $_SESSION['permisos']=$permisos;
+    $_SESSION['permisosMod']=$permisosMod;
+}
+
+
 
 ?>

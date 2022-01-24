@@ -2,6 +2,9 @@
 require_once("Config/Config.php");
 require_once("Helpers/Helpers.php");
 
+error_reporting(E_ALL);
+ini_set('display_errors', '1');
+
 $url = !empty($_GET['url']) ? $_GET['url'] : 'home/home';
 $arr = explode("/", $url);
 
@@ -28,6 +31,8 @@ if(!empty($arr[2])){
 
 require_once("Libraries/Core/Autoload.php");
 require_once("Libraries/Core/Load.php");
+
+
 ?>
 
 
