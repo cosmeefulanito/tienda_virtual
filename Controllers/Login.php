@@ -98,7 +98,6 @@ class Login extends Controllers{
 					}else{
 						$arrResponse = array('status' => false, 'msg' => 'No es posible realizar este proceso, vuelva a intentarlo');
 					}
-
 				}
 			}
 		}

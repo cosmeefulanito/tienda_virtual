@@ -1,6 +1,3 @@
-// jQuery(document).ready(function($) {
-// 	console.log("cargo desde el functions clientes")
-// });
 var tblClientes;
 var LoadingSpinner = document.querySelector("#divLoading");
 document.addEventListener('DOMContentLoaded', function(){

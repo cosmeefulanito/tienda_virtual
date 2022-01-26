@@ -120,18 +120,16 @@ class Clientes extends Controllers{
 
 	public function delCliente()
 	{
-		if ($_SESSION['permisosMod']['d']) {
-			if($_POST){
-				$idusuario = intval($_POST['idusuario']);
-				$request = $this->model->deleteCliente($idusuario);
-				if($request){
-					$arr = array('msg' => 'Cliente eliminado','status' => true);
-				}else{
-					$arr = array('msg' => 'Ha ocurrido un problema','status' => false);
-				}
-				echo json_encode($arr, JSON_UNESCAPED_UNICODE);
-			}	
-		}		
+		if($_POST){
+			$idusuario = intval($_POST['idusuario']);
+			$request = $this->model->deleteCliente($idusuario);
+			if($request){
+				$arr = array('msg' => 'Cliente eliminado','status' => true);
+			}else{
+				$arr = array('msg' => 'Ha ocurrido un problema','status' => false);
+			}
+			echo json_encode($arr, JSON_UNESCAPED_UNICODE);
+		}	
 	}
 
 
