@@ -42,13 +42,31 @@ class Clientes extends Controllers{
 				$RolId = 2;
 				$Request="";
 
-				if($IdUsuario == 0){	
-						// Si usuario es nuevo
+				if($IdUsuario == 0){	// Si usuario es nuevo
 						$option = 1;
-						$Pswd = empty($_POST['txt_password']) ? hash('SHA256', passGenerator()) : hash('SHA256', $_POST['txt_password']);
-						$Request = $this->model->insertCliente($Rut,$Nombre,$Apellido,$Fono,$Email,$Pswd,$RolId,$RutEmpresa,$RazonSocial,$NombreFantasia,$DireccionEmpresa);
-						}else{
-							// Actualizo usuario existente						
+						$Passw = empty($_POST['txt_password']) ? passGenerator() : $_POST['txt_password'];
+						$Pswd = hash('SHA256', $Passw);
+						$Request = $this->model->insertCliente($Rut,
+																$Nombre,
+																$Apellido,
+																$Fono,
+																$Email,
+																$Pswd,
+																$RolId,
+																$RutEmpresa,
+																$RazonSocial,
+																$NombreFantasia,
+																$DireccionEmpresa);
+						$strNombreCompleto = $Nombre . " " . $Apellido;
+						$dataUser = array(
+							'nombreUsuario' => $strNombreCompleto, 
+							'email' => $Email,
+							'password' => $Passw,
+							'asunto' => 'Bienvenido a la tienda en línea '. NOMBRE_REMITENTE);	
+						$sendMail = sendEmail($dataUser,'Email_bienvenida');
+						
+
+						}else{ 		// Actualizo usuario existente						
 							$option = 2;
 							$Pswd = empty($_POST['txt_password']) ? "" : hash('SHA256', $_POST['txt_password']);
 							$Request = $this->model->updateCliente($IdUsuario,$Rut,$Nombre,$Apellido,$Fono,$Email,$Pswd,$RutEmpresa,$RazonSocial,$NombreFantasia,$DireccionEmpresa);

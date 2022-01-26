@@ -16,7 +16,7 @@ CONST DB_CHARSET = "charset=utf8";
 //Datos envio de correo
 const NOMBRE_REMITENTE = "ANDRÉS ASTORGA SPA.";
 const EMAIL_REMITENTE = "no-reply@aastorgaspa.cl";
-const NOMBRE_EMPESA = "Asesorías y servicios tic aastorga spa";
+const NOMBRE_EMPESA = "Asesorías y servicios ti aastorga spa";
 const WEB_EMPRESA = "www.aaastorgatic.cl";
 
 ?>
