@@ -46,17 +46,31 @@ class Clientes extends Controllers{
 						$option = 1;
 						$Passw = empty($_POST['txt_password']) ? passGenerator() : $_POST['txt_password'];
 						$Pswd = hash('SHA256', $Passw);
-						$Request = $this->model->insertCliente($Rut,
-																$Nombre,
-																$Apellido,
-																$Fono,
-																$Email,
-																$Pswd,
-																$RolId,
-																$RutEmpresa,
-																$RazonSocial,
-																$NombreFantasia,
-																$DireccionEmpresa);
+							if($_SESSION['permisosMod']['w']){
+								$Request = $this->model->insertCliente($Rut,
+																	$Nombre,
+																	$Apellido,
+																	$Fono,
+																	$Email,
+																	$Pswd,
+																	$RolId,
+																	$RutEmpresa,
+																	$RazonSocial,
+																	$NombreFantasia,
+																	$DireccionEmpresa);
+							}					
+
+						}else{		// Actualizo usuario existente
+							if($_SESSION['permisosMod']['u']){			
+								$option = 2;
+								$Pswd = empty($_POST['txt_password']) ? "" : hash('SHA256', $_POST['txt_password']);
+								$Request = $this->model->updateCliente($IdUsuario,$Rut,$Nombre,$Apellido,$Fono,$Email,$Pswd,$RutEmpresa,$RazonSocial,$NombreFantasia,$DireccionEmpresa);
+							}
+					}
+
+
+					// Si usuario ya existe
+					if($Request>0){
 						$strNombreCompleto = $Nombre . " " . $Apellido;
 						$dataUser = array(
 							'nombreUsuario' => $strNombreCompleto, 
@@ -64,21 +78,14 @@ class Clientes extends Controllers{
 							'password' => $Passw,
 							'asunto' => 'Bienvenido a la tienda en línea '. NOMBRE_REMITENTE);	
 						$sendMail = sendEmail($dataUser,'Email_bienvenida');
-						
-
-						}else{ 		// Actualizo usuario existente						
-							$option = 2;
-							$Pswd = empty($_POST['txt_password']) ? "" : hash('SHA256', $_POST['txt_password']);
-							$Request = $this->model->updateCliente($IdUsuario,$Rut,$Nombre,$Apellido,$Fono,$Email,$Pswd,$RutEmpresa,$RazonSocial,$NombreFantasia,$DireccionEmpresa);
+						if($option == 1 && $sendMail){
+							$arrResponse = array('status' => true, 'msg' => 'Usuario ingresado correctamente, se le ha enviado un correo a la dirección ingresada');
+						}else if ($option == 1 && !$sendMail) {
+							$arrResponse = array('status' => true, 'msg' => 'Usuario ingresado correctamente, pero ha ocurrido un error al enviar el correo');
+						} else if ($option == 2) {
+							$arrResponse = array('status' => true, 'msg' => 'Usuario actualizado correctamente');
 					}
-
-
-					// Si usuario ya existe
-					if($Request>0){
-						if($option == 1)
-						$arrResponse = array('status' => true, 'msg' => 'Usuario ingresado correctamente');
-						else if ($option == 2)
-						$arrResponse = array('status' => true, 'msg' => 'Usuario actualizado correctamente');
+						
 					}else if($Request == 'Existe'){
 						$arrResponse = array('status' => false, 'msg' => 'Email o RUT ya existe');
 					}else{
@@ -94,7 +101,6 @@ class Clientes extends Controllers{
 	{
 		if($_SESSION['permisosMod']['r']){
 			$arrUsuarios = $this->model->selectClientes();
-
 			$btnView = '';
 			$btnEdit = '';		
 			$btnDelete = '';
@@ -116,7 +122,8 @@ class Clientes extends Controllers{
 				$arrUsuarios[$i]['accion']='<div class="text-center">'.$btnView. ' '.$btnEdit. ' '.$btnDelete.'<div>';			
 			} //endfor
 			echo json_encode($arrUsuarios);
-		}		
+		}
+		die();
 	}
 
 	public function getCliente($idpersona)
@@ -133,20 +140,23 @@ class Clientes extends Controllers{
 			}
 			// dep($arrUsuario);		
 			echo json_encode($arrResponse,JSON_UNESCAPED_UNICODE);
-		}	
+		}
 	}
 
 	public function delCliente()
 	{
 		if($_POST){
-			$idusuario = intval($_POST['idusuario']);
-			$request = $this->model->deleteCliente($idusuario);
-			if($request){
-				$arr = array('msg' => 'Cliente eliminado','status' => true);
-			}else{
-				$arr = array('msg' => 'Ha ocurrido un problema','status' => false);
+			if($_SESSION['permisosMod']['d']){
+				$idusuario = intval($_POST['idusuario']);
+				$request = $this->model->deleteCliente($idusuario);
+
+				if($request){
+					$arr = array('msg' => 'Cliente eliminado','status' => true);
+				}else{
+					$arr = array('msg' => 'Ha ocurrido un problema','status' => false);
+				}
 			}
-			echo json_encode($arr, JSON_UNESCAPED_UNICODE);
+				echo json_encode($arr, JSON_UNESCAPED_UNICODE);
 		}	
 	}
 

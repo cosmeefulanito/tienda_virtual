@@ -1,4 +1,7 @@
 <?php 
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 
 // Muestra url base del proyecto
 function base_url(){
@@ -60,6 +63,17 @@ function strClean($strCadena){
     $string = str_ireplace("]","",$string);
     $string = str_ireplace("==","",$string);
     return $string;
+}
+
+function uploadImage(array $data, string $name){
+    $url_tmp = $data["tmp_name"];
+    $destino = "Assets/image/uploads/".$name;
+    $move = move_uploaded_file($url_tmp, $destino);
+    return $move;
+}
+
+function deleteFile($file){
+    unlink("Assets/image/uploads/".$file);
 }
 
 function setSessionUser($idpersona){ //Actualiza variable de sesion del usuario
