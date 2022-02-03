@@ -11,6 +11,7 @@
     <script type="text/javascript" src="<?=media();?>/js/plugins/dataTables.bootstrap.min.js"></script>
     <script type="text/javascript">const base_url = '<?=base_url();?>'</script> 
     <script type="text/javascript" src="<?=media();?>/js/plugins/sweetalert.min.js"></script>
+    <script type="text/javascript" src="<?=media();?>/js/tinymce/tinymce.min.js"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script>
 

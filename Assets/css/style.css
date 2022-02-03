@@ -37,6 +37,10 @@
 	height: 50px;
 }
 
+.bootstrap-select>.dropdown-toggle {
+	border: 1px solid #CCC;
+}
+
 
 /* ......::::::::::::::::: Estilo de categorias :::::::::::::::::::::::::::::::::... */
 
@@ -70,6 +74,10 @@
 }
 .upimg, .notBlock{
 	display: none !important;
+}
+
+.textcenter{
+	text-align: center;
 }
 .errorArchivo{
 	font-size: 16px;
