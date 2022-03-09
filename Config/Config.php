@@ -12,6 +12,13 @@ CONST DB_USER = "root";
 CONST DB_PASSWORD = "";
 CONST DB_CHARSET = "charset=utf8";
 
+// Simbolo de moneda
+CONST MONEY = "$";
+
+// Delimitador entero y decimal
+CONST SPD = ",";
+CONST SPM = ".";
+
 // Crear variables constantes
 //Datos envio de correo
 const NOMBRE_REMITENTE = "ANDRÉS ASTORGA SPA.";

@@ -14,6 +14,11 @@
 	
 }
 
+.headerTest{
+	background-color: yellow;
+	color: #000;
+}
+
 .required{
 	color: red;
 	font-size: 13pt;
@@ -123,3 +128,60 @@
 }
 
 /*--------------------------------------------------------*/
+
+/* ESTILO CARGA DE PRODUCTOS */
+
+#containerImages{
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+	flex-wrap: wrap;
+}
+
+#containerImages > div {
+	margin-right: 10px;
+	margin-bottom: 8px;
+}
+
+.prevImage{
+	border: 1px solid #000;
+	width: 120px;
+	height: 148px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.prevImage img{
+	width: 100%;
+
+}
+
+.inputUploadFile{
+	display: none;
+}
+
+.btnUploadFile, .btnDeleteImage{
+	border: 0;
+	background-color: #009688;
+	text-align: center;
+	padding: 2px 3px;
+	color: #FFF;
+	font-size: 9pt;
+	cursor: pointer;
+	width: 100%;
+}
+
+.btnDeleteImage{
+	background-color: #dc3545;
+}
+
+.prevImage .loading{
+	width: 60px;
+	height: 60px;
+}
+
+#fileFotoReferencia img{
+	width: 150px;
+	margin: 10px;
+}

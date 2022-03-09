@@ -9,11 +9,14 @@
     <script src="<?=media();?>/js/font-awesome.js"></script>
     <script type="text/javascript" src="<?=media();?>/js/plugins/jquery.dataTables.min.js"></script>
     <script type="text/javascript" src="<?=media();?>/js/plugins/dataTables.bootstrap.min.js"></script>
-    <script type="text/javascript">const base_url = '<?=base_url();?>'</script> 
+    <script type="text/javascript">const base_url = '<?=base_url();?>'</script>
+    <script type="text/javascript">const SMoney = '<?=MONEY;?>'</script>
     <script type="text/javascript" src="<?=media();?>/js/plugins/sweetalert.min.js"></script>
     <script type="text/javascript" src="<?=media();?>/js/tinymce/tinymce.min.js"></script>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script>
+    <!-- <script type="text/javascript" src="<?=media();?>/css/bootstrap-select.min.css"></script> -->
+    <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script> -->
+    <script type="text/javascript" src="<?=media();?>/js/plugins/bootstrap-select.min.js"></script>
 
 
     <!-- Datatables extensions export -->

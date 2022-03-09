@@ -1,4 +1,4 @@
-var LoadingSpinner = document.querySelector("#divLoading");			
+var LoadingSpinner = document.querySelector("#divLoading");
 document.addEventListener('DOMContentLoaded',function(){
 	var RolesTbl = $('#rolesTable').DataTable({
 	"language": {
